@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nitish Kumar | Java Backend Developer</title>
+    <!-- Bootstrap CSS (v5.3.0) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons (v6.4.0) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Include Devicon for C++ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        :root {
+            --primary-color: rgba(108, 99, 255, 0.8);
+            --secondary-color: rgba(54, 209, 220, 0.8);
+            --accent-color: rgba(255, 101, 132, 0.8);
+            --dark-color: rgba(26, 26, 46, 0.9);
+            --light-color: rgba(245, 245, 247, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --neu-bg: rgba(208, 208, 208, 0.7);
+
+            /* Light Mode Shadows */
+            --neu-shadow-light: 8px 8px 16px rgba(174, 174, 192, 0.6),
+                -8px -8px 16px rgba(255, 255, 255, 0.8);
+            --neu-shadow-hover-light: 12px 12px 24px rgba(174, 174, 192, 0.7),
+                -12px -12px 24px rgba(255, 255, 255, 0.9);
+
+            --text-color: #333;
+            --bg-color: #e8edf2;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --body-bg-start: #e8edf2;
+            --body-bg-end: #dce3ec;
+            --liquid-color: rgba(108, 99, 255, 0.15);
+
+            /* Default shadows (will be overridden) */
+            --neu-shadow: var(--neu-shadow-light);
+            --neu-shadow-hover: var(--neu-shadow-hover-light);
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --primary-color: rgba(108, 99, 255, 0.9);
+            --secondary-color: rgba(54, 209, 220, 0.9);
+            --accent-color: rgba(255, 101, 132, 0.9);
+            --text-color: rgba(248, 249, 250, 0.9);
+            --bg-color: #0f0f23;
+            --card-bg: rgba(26, 26, 46, 0.6);
+            --neu-bg: rgba(26, 26, 46, 0.8);
+
+            /* Dark Mode Shadows */
+            --neu-shadow-dark: 8px 8px 16px rgba(0, 0, 0, 0.7),
+                -8px -8px 16px rgba(58, 12, 163, 0.3);
+            --neu-shadow-hover-dark: 12px 12px 24px rgba(0, 0, 0, 0.8),
+                -12px -12px 24px rgba(58, 12, 163, 0.4);
+
+            --glass-bg: rgba(26, 26, 46, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --body-bg-start: #0f0f23;
+            --body-bg-end: #1a1a3e;
+            --liquid-color: rgba(108, 99, 255, 0.2);
+
+            --neu-shadow: var(--neu-shadow-dark);
+            --neu-shadow-hover: var(--neu-shadow-hover-dark);
+        }
+
+        /* Apply Shadows Based on Theme */
+        [data-theme="light"] {
+            --neu-shadow: var(--neu-shadow-light);
+            --neu-shadow-hover: var(--neu-shadow-hover-light);
+        }
+
+        /* Updated Global Styles */
+        body {
+            background: linear-gradient(135deg, var(--body-bg-start) 0%, var(--body-bg-end) 100%);
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+            color: var(--text-color);
+            padding-top: 70px;
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+
+        /* Liquid Background */
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .liquid-shape {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            background: var(--liquid-color);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: morph 15s linear infinite;
+        }
+
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            left: -100px;
+            animation-duration: 20s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -100px;
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            left: 60%;
+            animation-duration: 18s;
+        }
+
+        * {
+            transition: background-color 0.3s ease,
+                background 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            25% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            75% {
+                border-radius: 50% 60% 30% 60% / 40% 40% 60% 50%;
+            }
+        }
+
+        /* Branding */
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Enhanced Navbar Styles */
+        .neu-navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 1rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-logo {
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: var(--neu-shadow);
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-logo:hover {
+            box-shadow: var(--neu-shadow-hover);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .brand-logo:hover img {
+            transform: scale(1.08);
+            border-color: var(--primary-color);
+        }
+
+        .nav-hover {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: var(--text-color) !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-hover:hover::after,
+        .nav-hover.active::after {
+            width: 80%;
+        }
+
+        .nav-hover:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler.neu-btn {
+            border: none;
+            box-shadow: var(--neu-shadow);
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            transition: all 0.3s;
+            box-shadow: var(--neu-shadow);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: var(--neu-shadow-hover);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.5s;
+        }
+
+        [data-theme="dark"] .theme-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* ===== ENHANCED CARD STYLES ===== */
+        .neu-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: var(--neu-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 24px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .neu-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .neu-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--neu-shadow-hover);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Dark Mode Card Hover */
+        [data-theme="dark"] .neu-card:hover {
+            background: rgba(26, 26, 46, 0.7);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        /* Card with Gradient Border */
+        .neu-card-gradient {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: var(--neu-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+                linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-origin: padding-box, border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .neu-card-gradient:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--neu-shadow-hover);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+                linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Shadow Color Variations */
+        .shadow-purple {
+            --neu-shadow: 8px 8px 16px rgba(108, 99, 255, 0.3),
+                -8px -8px 16px rgba(255, 255, 255, 0.7);
+            --neu-shadow-hover: 12px 12px 24px rgba(108, 99, 255, 0.4),
+                -12px -12px 24px rgba(255, 255, 255, 0.8);
+        }
+
+        .shadow-pink {
+            --neu-shadow: 8px 8px 16px rgba(255, 101, 132, 0.3),
+                -8px -8px 16px rgba(255, 255, 255, 0.7);
+            --neu-shadow-hover: 12px 12px 24px rgba(255, 101, 132, 0.4),
+                -12px -12px 24px rgba(255, 255, 255, 0.8);
+        }
+
+        .shadow-cyan {
+            --neu-shadow: 8px 8px 16px rgba(54, 209, 220, 0.3),
+                -8px -8px 16px rgba(255, 255, 255, 0.7);
+            --neu-shadow-hover: 12px 12px 24px rgba(54, 209, 220, 0.4),
+                -12px -12px 24px rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] .shadow-purple {
+            --neu-shadow: 8px 8px 16px rgba(108, 99, 255, 0.4),
+                -8px -8px 16px rgba(0, 0, 0, 0.6);
+            --neu-shadow-hover: 12px 12px 24px rgba(108, 99, 255, 0.5),
+                -12px -12px 24px rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="dark"] .shadow-pink {
+            --neu-shadow: 8px 8px 16px rgba(255, 101, 132, 0.4),
+                -8px -8px 16px rgba(0, 0, 0, 0.6);
+            --neu-shadow-hover: 12px 12px 24px rgba(255, 101, 132, 0.5),
+                -12px -12px 24px rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="dark"] .shadow-cyan {
+            --neu-shadow: 8px 8px 16px rgba(54, 209, 220, 0.4),
+                -8px -8px 16px rgba(0, 0, 0, 0.6);
+            --neu-shadow-hover: 12px 12px 24px rgba(54, 209, 220, 0.5),
+                -12px -12px 24px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ===== END ENHANCED CARD STYLES ===== */
+
+        .neu-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: var(--neu-shadow);
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .neu-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #fff !important;
+            box-shadow: var(--neu-shadow-hover);
+        }
+
+        /* Hero Section */
+        .hero-row {
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--neu-shadow);
+            transition: all 0.3s ease;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.03);
+            box-shadow: var(--neu-shadow-hover);
+        }
+
+        .spinning-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            border: 4px solid transparent;
+            border-top: 4px solid rgba(255, 255, 255, 0.3);
+            border-right: 4px solid var(--secondary-color);
+            border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .profile-img-container:hover .spinning-circle {
+            width: 300px;
+            height: 300px;
+            border-width: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            margin: 3rem 0;
+            opacity: 0.5;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Experience Cards */
+        .exp-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--neu-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .exp-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--neu-shadow-hover);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(108, 99, 255, 0.2);
+        }
+
+        .exp-date {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Skill Badges */
+        .skill-badge {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--neu-shadow);
+            display: inline-flex;
+            align-items: center;
+            margin: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+
+        .skill-badge i {
+            margin-right: 0.5rem;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: var(--neu-shadow-hover);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff !important;
+            border-color: transparent;
+        }
+
+        /* Project Images */
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        #projects .neu-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Items */
+        .contact-item {
+            transition: all 0.3s ease;
+            border-radius: 14px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--neu-shadow);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .contact-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--neu-shadow-hover);
+            background: rgba(108, 99, 255, 0.08);
+            border-color: rgba(108, 99, 255, 0.2);
+        }
+
+        .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer Links */
+        .footer-link {
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            box-shadow: var(--neu-shadow);
+            margin-bottom: 0.75rem;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            transform: translateX(6px);
+            color: var(--primary-color) !important;
+            box-shadow: var(--neu-shadow-hover);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        /* Social Links */
+        .social-link {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--neu-shadow);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white !important;
+            box-shadow: var(--neu-shadow-hover);
+            border-color: transparent;
+        }
+
+        /* Footer */
+        .neu-footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        /* Form Elements */
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(5px);
+            color: var(--text-color) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 12px !important;
+            padding: 0.75rem 1rem !important;
+        }
+
+        .form-control:focus {
+            box-shadow: var(--neu-shadow-hover) !important;
+            border-color: var(--primary-color) !important;
+            background-color: rgba(255, 255, 255, 0.12) !important;
+        }
+
+        ::placeholder {
+            color: var(--text-color) !important;
+            opacity: 0.6 !important;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            section {
+                padding: 3rem 0;
+            }
+
+            .profile-img-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .spinning-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-img-container:hover .spinning-circle {
+                width: 270px;
+                height: 270px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-row {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+
+            .hero-img {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+
+            .navbar-nav {
+                padding: 1rem 0;
+                gap: 0.75rem;
+            }
+
+            .nav-hover {
+                width: 100%;
+                text-align: center;
+                margin: 0.25rem 0;
+            }
+
+            .social-container {
+                justify-content: center !important;
+            }
+
+            .footer-link,
+            .contact-item {
+                text-align: center;
+            }
+
+            .neu-card,
+            .exp-card {
+                border-radius: 16px;
+            }
+
+            .skill-badge {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-img-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .spinning-circle {
+                width: 220px;
+                height: 220px;
+            }
+
+            .profile-img-container:hover .spinning-circle {
+                width: 240px;
+                height: 240px;
+            }
+
+            .section-title::after {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            #dynamic-text {
+                font-size: 1.5rem;
+                min-height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Animation for dynamic text */
+        #dynamic-text {
+            min-height: 60px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+        }
+
+        /* Center align projects section */
+        #projects .row {
+            justify-content: center;
+        }
+
+        #projects .col-lg-3 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #projects .neu-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #projects .neu-card .p-4 {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        #projects .neu-card p {
+            flex-grow: 1;
+        }
+
+        /* Achievement Badge Styles */
+        .badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="80" tabindex="0">
+    <!-- Liquid Background -->
+    <div class="liquid-bg">
+        <div class="liquid-shape shape-1"></div>
+        <div class="liquid-shape shape-2"></div>
+        <div class="liquid-shape shape-3"></div>
+    </div>
+
+    <!-- Enhanced Navbar Section -->
+    <nav class="navbar navbar-expand-lg fixed-top neu-navbar" data-aos="fade-down">
+        <div class="container">
+            <a class="navbar-brand gradient-text fw-bold" href="#">
+                <div class="brand-logo">
+                    <img src="ni30.png" alt="Logo"> &nbsp;
+                    Nitish Kumar
+                </div>
+            </a>
+            <button class="navbar-toggler neu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#home">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#experiences">
+                            <i class="fas fa-briefcase me-1"></i> Experiences
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#projects">
+                            <i class="fas fa-project-diagram me-1"></i> Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#skills">
+                            <i class="fas fa-code me-1"></i> Skills
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#education">
+                            <i class="fas fa-graduation-cap me-1"></i> Education
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover" href="#achievement">
+                            <i class="fas fa-trophy me-1"></i> Achievements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center justify-content-center" style="min-height: calc(85vh - 70px);">
+                <div class="col-lg-6 order-lg-2 text-center mb-4 mb-lg-0" data-aos="fade-left">
+                    <div class="profile-img-container">
+                        <img src="nitish.jpeg" alt="Profile Thumbnail" class="profile-img">
+                        <div class="spinning-circle"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1 text-center" data-aos="fade-right">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold gradient-text mb-2">Hi, I'm NITISH KUMAR</h1>
+                        <p class="lead fs-4 mb-3">B.Tech CSE | IKG PTU</p>
+                        <h3 id="dynamic-text" class="fw-bold mb-3 gradient-text" style="min-height: 60px;"></h3>
+
+                        <div class="d-flex justify-content-center gap-3 mb-4">
+                            <a href="https://www.linkedin.com/in/nitishcsit" target="_blank" class="neu-card p-3"
+                                data-aos="zoom-in">
+                                <i class="fab fa-linkedin fa-2x"></i>
+                            </a>
+                            <a href="https://github.com/nitishcsit" target="_blank" class="neu-card p-3"
+                                data-aos="zoom-in">
+                                <i class="fab fa-github fa-2x"></i>
+                            </a>
+                            <a href="https://leetcode.com/2233679ni30csit" target="_blank" class="neu-card p-3"
+                                data-aos="zoom-in">
+                                <i class="fas fa-code fa-2x"></i>
+                            </a>
+                            <a href="https://www.instagram.com/ni30_world/" target="_blank" class="neu-card p-3"
+                                data-aos="zoom-in">
+                                <i class="fa-brands fa-instagram fa-2x"></i>
+                            </a>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="#" target="_blank" class="neu-btn" data-aos="fade-up">
+                                <i class="fas fa-download me-2"></i> Resume
+                            </a>
+                            <a href="#contact" class="neu-btn" data-aos="fade-up" data-aos-delay="100">
+                                <i class="fas fa-paper-plane me-2"></i> Contact Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experiences">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">Experiences</h2>
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="exp-card shadow-purple">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <img src="agc.jpg" alt="IKG Ptu" width="50" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">AGC Intern</h5>
+                                <p class="exp-date mb-0">AGC | June 2024 - July 2024</p>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled ps-4">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Hotel Management
+                                System Development</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Java Backend
+                                Development</li>
+                            <li><i class="fas fa-check-circle me-2 text-primary"></i> Database Integration Experience
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="exp-card shadow-pink">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <img src="udemy.png" alt="WTN" width="50" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Java Full-Stack Training</h5>
+                                <p class="exp-date mb-0">Udemy | May 2024 - Sep 2024</p>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled ps-4">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Java Full Stack
+                                Certified</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> HTML, CSS, Java,
+                                MySQL, Springboot</li>
+                            <li><i class="fas fa-check-circle me-2 text-primary"></i> Cloud Deployment</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="exp-card shadow-cyan">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <img src="icetl.png" alt="Internship" width="50" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Summer Internship</h5>
+                                <p class="exp-date mb-0">ICETL Patna | Dec 2025 - May 2026</p>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled ps-4">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> Java & Spring Boot
+                                Development</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i> REST API & MySQL
+                                Integration</li>
+                            <li><i class="fas fa-check-circle me-2 text-primary"></i> Real-world Project Work</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">Projects</h2>
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-out">
+                    <div class="neu-card shadow-purple h-100">
+                        <img src="hms.webp" alt="Hotel Management System" class="project-img">
+                        <div class="p-4">
+                            <h5>Hotel Management System</h5>
+                            <p class="mb-3">A Java Swing application with MySQL database to manage bookings, customers,
+                                rooms, and staff.</p>
+                            <a href="#" target="_blank" class="neu-btn">
+                                <i class="fab fa-github me-1"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="neu-card shadow-pink h-100">
+                        <img src="fda.jpg" alt="Fire Detection App" class="project-img">
+                        <div class="p-4">
+                            <h5>Fire Detection App</h5>
+                            <p class="mb-3">A Python project using Flask and Tkinter with a CNN model to detect fire in
+                                images.</p>
+                            <a href="#" target="_blank" class="neu-btn">
+                                <i class="fab fa-github me-1"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="neu-card shadow-cyan h-100">
+                        <img src="wpa.png" alt="WeatherApp" class="project-img">
+                        <div class="p-4">
+                            <h5>Weather App</h5>
+                            <p class="mb-3">Built with Flask, Bootstrap, MySQL, this platform enhances agricultural
+                                productivity.</p>
+                            <a href="#" target="_blank" class="neu-btn">
+                                <i class="fab fa-github me-1"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="neu-card shadow-pink h-100">
+                        <img src="sms.png" alt="smart attendence system" class="project-img">
+                        <div class="p-4">
+                            <h5>Smart Attendance System</h5>
+                            <p class="mb-3">An OTP-Based Smart Attendance System for Secure and Real-Time Student Verification.</p>
+                            <a href="#" target="_blank" class="neu-btn">
+                                <i class="fab fa-github me-1"></i>View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">Technical Skills</h2>
+            <div class="row">
+                <div class="col-12 col-md-6" data-aos="zoom-in">
+                    <div class="neu-card p-4 h-100 shadow-purple">
+                        <h4 class="text-center mb-4">Programming Languages</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="fab fa-java"></i> Java</span>
+                            <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="skill-badge"><i class="devicon-cplusplus-plain"></i> C/C++</span>
+                            <span class="skill-badge"><i class="fas fa-database"></i> SQL</span>
+                            <span class="skill-badge"><i class="fab fa-html5"></i> HTML5</span>
+                            <span class="skill-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="neu-card p-4 h-100 shadow-pink">
+                        <h4 class="text-center mb-4">Frameworks & Libraries</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="devicon-spring-plain"></i> Spring Boot</span>
+                            <span class="skill-badge"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                            <span class="skill-badge"><i class="devicon-numpy-original"></i> Numpy</span>
+                            <span class="skill-badge"><i class="devicon-pandas-original"></i> Pandas</span>
+                            <span class="skill-badge">🔬 Scikit-learn</span>
+                            <span class="skill-badge">📊 Matplotlib</span>
+                            <span class="skill-badge">🌊 Seaborn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="neu-card p-4 h-100 shadow-cyan">
+                        <h4 class="text-center mb-4">Core Skill</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="fas fa-microchip"></i> Internet Of Things</span>
+                            <span class="skill-badge"><i class="fas fa-brain"></i> Software Testing</span>
+                            <span class="skill-badge"><i class="fas fa-cloud"></i> AWS Cloud</span>
+                            <span class="skill-badge"><i class="fas fa-code"></i> DSA</span>
+                            <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="skill-badge"><i class="fas fa-paint-brush"></i> Graphic Design</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="neu-card p-4 h-100 shadow-purple">
+                        <h4 class="text-center mb-4">Tools</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="devicon-git-plain"></i>Git</span>
+                            <span class="skill-badge"><i class="devicon-github-plain"></i> Github</span>
+                            <span class="skill-badge"><i class="devicon-postman-plain"></i> Postman</span>
+                            <span class="skill-badge"><i class="devicon-vscode-plain"></i> VS Code</span>
+                            <span class="skill-badge"><i class="devicon-maven-plain"></i> Maven</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">Education</h2>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8" data-aos="fade-up">
+                    <div class="neu-card p-4 shadow-purple">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <img src="Ptu-logo.png" alt="IKG PTU" width="80" class="rounded-circle">
+                            </div>
+                            <div class="col-md-10">
+                                <h4>IKG Punjab Technical University, Jalandhar</h4>
+                                <p class="mb-1">Bachelor of Technology - Computer Science & Information Technology</p>
+                                <p class="mb-1">2022 - 2026 | Current CGPA: 7.40/10</p>
+                                <p class="mb-0">Relevant Coursework: Data Structures, DBMS, Full Stack Development</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-10 col-lg-8 mt-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="neu-card p-4 shadow-pink">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <img src="B S-logo.png" alt="BS College" width="80" class="rounded-circle">
+                            </div>
+                            <div class="col-md-10">
+                                <h4>B S College, Shahkund</h4>
+                                <p class="mb-1">Intermediate - Physics, Chemistry, Mathematics</p>
+                                <p class="mb-0">2018 - 2020 | Percentage: 60.4%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Section -->
+    <section id="achievement" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">
+                <i class="fas fa-trophy me-2"></i>Achievements
+            </h2>
+            <div class="row g-4 justify-content-center">
+                <!-- Achievement 1 -->
+                <div class="col-12 col-md-6 col-lg-5" data-aos="zoom-in">
+                    <div class="neu-card h-100 shadow-purple">
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="mb-0">2-Day Workshop at IIT Roorkee</h5>
+                                <span class="badge bg-primary rounded-pill">2023</span>
+                            </div>
+                            <p class="mb-3">Attended intensive workshop on startups, innovation, entrepreneurship, and
+                                business growth strategies.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <span class="badge bg-primary rounded-pill">Certificate</span>
+                                <span class="badge bg-info rounded-pill">IIT Roorkee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="col-12 col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="neu-card h-100 shadow-pink">
+                        <div class="p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="mb-0">250+ Days Problem-Solving</h5>
+                                <span class="badge bg-warning text-dark rounded-pill">2025</span>
+                            </div>
+                            <p class="mb-3">Maintained consistent coding practice streak of 250+ days on LeetCode
+                                platform.</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <span class="badge bg-warning text-dark rounded-pill">Consistency</span>
+                                <span class="badge bg-success rounded-pill">LeetCode</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="text-center mb-5 gradient-text section-title" data-aos="fade-up">Get In Touch</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up">
+                    <div class="neu-card p-4 h-100 shadow-purple">
+                        <h4 class="gradient-text mb-4">Contact Info</h4>
+                        <div class="contact-item">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-envelope me-3 fa-lg"></i>
+                                <a href="mailto:nitishk845737@gmail.com">nitishk845737@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-phone me-3 fa-lg"></i>
+                                <a href="tel:+919354425514">+91 9354425514</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt me-3 fa-lg"></i>
+                                <span>Amritsar, Punjab, India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="neu-card p-4 h-100 shadow-pink">
+                        <h4 class="gradient-text mb-4">Send Me a Message</h4>
+                        <form id="contactForm" action="https://formspree.io/f/mdkwojaq" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control bg-transparent border-secondary"
+                                        placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email"
+                                        class="form-control bg-transparent border-secondary" placeholder="Your Email"
+                                        required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject"
+                                        class="form-control bg-transparent border-secondary" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control bg-transparent border-secondary"
+                                        rows="5" placeholder="Your Message" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="neu-btn">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="formStatus" class="mt-3 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="neu-footer">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up">
+                    <div class="neu-card p-4 h-100 shadow-purple">
+                        <h4 class="gradient-text mb-4">About Me</h4>
+                        <p>Java Backend Developer with hands-on experience in Spring Boot, REST APIs, MySQL, Hibernate,
+                            and Git. Passionate about writing clean, scalable code and solving real-world backend
+                            problems.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="neu-card p-4 h-100 shadow-pink">
+                        <h5 class="gradient-text mb-4">Quick Links</h5>
+                        <a href="#home" class="footer-link">Home</a>
+                        <a href="#projects" class="footer-link">Projects</a>
+                        <a href="#education" class="footer-link">Education</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="neu-card p-4 h-100 shadow-cyan">
+                        <h5 class="gradient-text mb-4">More Links</h5>
+                        <a href="#experiences" class="footer-link">Experience</a>
+                        <a href="#skills" class="footer-link">Skills</a>
+                        <a href="#achievement" class="footer-link">Achievements</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="neu-card p-4 h-100 shadow-purple">
+                        <h5 class="gradient-text mb-4">Connect With Me</h5>
+                        <div class="d-flex justify-content-center gap-3 mb-4">
+                            <a href="https://www.linkedin.com/in/nitishcsit" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin-in fa-lg"></i>
+                            </a>
+                            <a href="https://github.com/nitishcsit" target="_blank" class="social-link">
+                                <i class="fab fa-github fa-lg"></i>
+                            </a>
+                            <a href="https://leetcode.com/2233679ni30csit" target="_blank" class="social-link">
+                                <i class="fas fa-code fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="text-center">
+                            <a href="https://drive.google.com/file/d/1k_DCgAkd2HdIMWebLorKy76-1Qi5yg_4/view?usp=drivesdk"
+                                target="_blank" class="neu-btn">
+                                <i class="fas fa-download me-2"></i>Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 pt-4">
+                <p class="mb-0 small">&copy; 2025 Nitish Kumar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            once: false,
+            easing: 'ease-in-out'
+        });
+
+        // Typewriter effect
+        const typeStrings = ["Java Developer", "Spring Boot Developer", "Java Backend Developer", "REST APIs", "MySQL"];
+        let currentString = 0, currentChar = 0;
+        const dynamicText = document.getElementById("dynamic-text");
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeWriter() {
+            const currentText = typeStrings[currentString];
+
+            if (isDeleting) {
+                dynamicText.textContent = currentText.substring(0, currentChar - 1);
+                currentChar--;
+                typingSpeed = 50;
+            } else {
+                dynamicText.textContent = currentText.substring(0, currentChar + 1);
+                currentChar++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && currentChar === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1500;
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentString = (currentString + 1) % typeStrings.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typingSpeed);
+        }
+
+        setTimeout(typeWriter, 1000);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active nav link
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-hover');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                formStatus.innerHTML = '';
+                formStatus.className = 'mt-3 text-center';
+
+                try {
+                    const formData = new FormData(this);
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        formStatus.innerHTML = '<div class="alert alert-success">Message sent successfully! I\'ll get back to you soon.</div>';
+                        this.reset();
+                    } else {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Failed to send message');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    formStatus.innerHTML = `<div class="alert alert-danger">${error.message || 'There was a problem sending your message. Please try again later.'}</div>`;
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            });
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', function () {
+            let theme;
+            if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                theme = 'light';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                theme = 'dark';
+            }
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+
+</html>
